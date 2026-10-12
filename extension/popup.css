@@ -1,0 +1,230 @@
+/* ─── PhishShield AI Extension Popup CSS ─────────────────────────────────── */
+/* Design tokens */
+:root {
+  --navy:          #101827;
+  --slate-dark:    #1A2938;
+  --cyan:          #08C5DF;
+  --soft-white:    #F1F5F9;
+  --secondary-txt: #CBD5E1;
+  --muted-txt:     #94A3B8;
+  --border:        #2B3B4F;
+  --input-bg:      #0B1220;
+  --danger:        #EF4444;
+  --radius:        10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 340px;
+  min-height: 260px;
+  background: var(--navy);
+  color: var(--soft-white);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Popup container ─────────────────────────────────────────────────────── */
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.popup-header {
+  background: var(--slate-dark);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 4px;
+}
+
+.shield-icon {
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.brand-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--soft-white);
+  letter-spacing: -0.01em;
+}
+
+.brand-ai {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.tagline {
+  font-size: 11px;
+  color: var(--muted-txt);
+  margin-left: 37px;
+}
+
+/* ── Main form area ──────────────────────────────────────────────────────── */
+.popup-main {
+  padding: 14px 16px;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--secondary-txt);
+  margin-bottom: 6px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#url-input {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 9px 10px 9px 32px;
+  color: var(--soft-white);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#url-input::placeholder {
+  color: var(--muted-txt);
+}
+
+#url-input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px rgba(8, 197, 223, 0.15);
+}
+
+#url-input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+#url-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-msg {
+  font-size: 11px;
+  color: var(--danger);
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hint-msg {
+  font-size: 11px;
+  color: var(--muted-txt);
+  margin-top: 5px;
+}
+
+/* ── Scan button ─────────────────────────────────────────────────────────── */
+.scan-btn {
+  width: 100%;
+  background: var(--cyan);
+  color: var(--navy);
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity 0.15s, transform 0.1s;
+  letter-spacing: 0.01em;
+}
+
+.scan-btn:hover {
+  opacity: 0.92;
+}
+
+.scan-btn:active {
+  transform: scale(0.97);
+}
+
+.scan-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.scan-btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* Spinner inside button */
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(16, 24, 39, 0.3);
+  border-top-color: var(--navy);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.popup-footer {
+  border-top: 1px solid var(--border);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: var(--muted-txt);
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    border-top-color: var(--navy);
+  }
+}

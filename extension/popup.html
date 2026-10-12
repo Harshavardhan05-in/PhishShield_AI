@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhishShield AI</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="popup-container">
+
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <svg class="shield-icon" width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M32 4L8 14v18c0 13.2 10.4 25.6 24 29 13.6-3.4 24-15.8 24-29V14L32 4z" fill="#08C5DF" fill-opacity="0.12" stroke="#08C5DF" stroke-width="2.5" stroke-linejoin="round"/>
+          <rect x="24" y="28" width="16" height="12" rx="2" fill="#08C5DF" fill-opacity="0.8"/>
+          <path d="M27 28v-3a5 5 0 0 1 10 0v3" stroke="#08C5DF" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="32" cy="33" r="1.5" fill="#101827"/>
+          <rect x="31" y="33" width="2" height="3" rx="1" fill="#101827"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">PhishShield</span>
+          <span class="brand-ai">AI</span>
+        </div>
+      </div>
+      <p class="tagline">Your personal phishing guard</p>
+    </header>
+
+    <!-- Form -->
+    <main class="popup-main">
+      <form id="scan-form" novalidate aria-label="URL scanner">
+        <div class="form-group">
+          <label for="url-input" class="form-label">Suspicious URL</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#94A3B8" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+            </svg>
+            <input
+              type="url"
+              id="url-input"
+              name="url"
+              placeholder="https://suspicious-site.com"
+              autocomplete="off"
+              spellcheck="false"
+              autocapitalize="none"
+              aria-describedby="url-error url-hint"
+              aria-invalid="false"
+            />
+          </div>
+          <p id="url-error" class="error-msg" role="alert" aria-live="polite" hidden></p>
+          <p id="url-hint" class="hint-msg">URL is never visited — analysis is structure-only</p>
+        </div>
+
+        <button type="submit" id="scan-btn" class="scan-btn" aria-label="Scan URL for phishing indicators">
+          <svg class="btn-icon" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+          </svg>
+          <span id="btn-text">Scan URL</span>
+        </button>
+      </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <svg width="12" height="12" fill="none" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M10 2L3 5.5v5c0 4.5 3 8 7 9 4-1 7-4.5 7-9v-5L10 2z" stroke="#94A3B8" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <span>No browsing history accessed &nbsp;·&nbsp; No data stored</span>
+    </footer>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
