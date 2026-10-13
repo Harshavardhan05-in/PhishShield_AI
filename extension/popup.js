@@ -11,8 +11,10 @@
 
 'use strict';
 
-// Dashboard URL — update this to match your local dev server or hosted URL
-const DASHBOARD_BASE_URL = 'http://localhost:5173/dashboard';
+// Dashboard URL — defaults to deployed production dashboard (set to DEV_DASHBOARD_URL for local dev)
+const PROD_DASHBOARD_URL = 'https://phish-shield-ai-pink.vercel.app/dashboard';
+const DEV_DASHBOARD_URL = 'http://localhost:5173/dashboard';
+const DASHBOARD_BASE_URL = PROD_DASHBOARD_URL;
 
 // DOM references
 const form = document.getElementById('scan-form');

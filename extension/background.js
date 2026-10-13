@@ -3,10 +3,13 @@
  * Handles navigation requests (e.g. Go to Browser Home Page) and direct URL scan requests.
  */
 
-const API_BASE_URL = 'http://localhost:8000';
+const PROD_API_BASE_URL = 'https://phishshield-ai-uvv5.onrender.com';
+const DEV_API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = PROD_API_BASE_URL;
 
 async function performScanApi(url) {
-  const response = await fetch(`${API_BASE_URL}/api/v1/scan`, {
+  const baseUrl = API_BASE_URL.replace(/\/+$/, '').replace(/\/api\/v1$/i, '');
+  const response = await fetch(`${baseUrl}/api/v1/scan`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
