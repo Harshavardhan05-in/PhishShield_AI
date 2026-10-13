@@ -1,6 +1,32 @@
 import axios from 'axios'
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const PROD_BACKEND_URL = 'https://phishshield-ai-uvv5.onrender.com'
+const DEV_BACKEND_URL = 'http://localhost:8000'
+
+export function resolveApiBaseUrl(
+  envUrl = import.meta.env.VITE_API_BASE_URL,
+  isProd = import.meta.env.PROD,
+  hostname = typeof window !== 'undefined' ? window.location.hostname : ''
+) {
+  const trimmed = typeof envUrl === 'string' ? envUrl.trim() : ''
+  const isLocalRuntime = hostname === 'localhost' || hostname === '127.0.0.1'
+
+  let raw = trimmed
+  if (!raw) {
+    raw = isProd ? PROD_BACKEND_URL : DEV_BACKEND_URL
+  } else if (
+    isProd &&
+    !isLocalRuntime &&
+    /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?(\/|$)/i.test(raw)
+  ) {
+    raw = PROD_BACKEND_URL
+  }
+
+  // Strip trailing slashes and any accidental trailing /api/v1 segment
+  return raw.replace(/\/+$/, '').replace(/\/api\/v1$/i, '').replace(/\/+$/, '')
+}
+
+export const BASE_URL = resolveApiBaseUrl()
 
 const api = axios.create({
   baseURL: BASE_URL,

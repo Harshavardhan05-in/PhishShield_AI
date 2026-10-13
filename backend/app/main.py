@@ -45,9 +45,15 @@ app = FastAPI(
 )
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
+PRODUCTION_FRONTEND_ORIGIN = "https://phish-shield-ai-pink.vercel.app"
+cors_origins = list(dict.fromkeys([
+    *settings.allowed_origins,
+    PRODUCTION_FRONTEND_ORIGIN,
+]))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.allowed_origins,
+    allow_origins=cors_origins,
     allow_origin_regex=r"^(chrome-extension://.*|http://(localhost|127\.0\.0\.1)(:\d+)?)$",
     allow_credentials=False,
     allow_methods=["GET", "POST"],

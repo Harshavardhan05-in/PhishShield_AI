@@ -72,10 +72,18 @@ export default function ErrorState({ error, onRetry, url }) {
   let description = 'An unexpected error occurred. Please try again.'
   let hint = null
 
+  const isLocalDev =
+    Boolean(import.meta.env.DEV) &&
+    (typeof window === 'undefined' ||
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1')
+
   if (isNetworkError || isTimeout) {
     title = 'Backend Unavailable'
     description = 'Could not connect to the PhishShield AI backend.'
-    hint = 'Make sure the FastAPI server is running on port 8000 (uvicorn app.main:app --reload).'
+    hint = isLocalDev
+      ? 'Make sure the FastAPI server is running on port 8000 (uvicorn app.main:app --reload).'
+      : 'The analysis service may be waking up or temporarily unreachable. Please wait a moment and click Retry.'
   } else if (is422) {
     title = 'Invalid URL'
     description = extractReadableErrorMessage(error, 'The submitted URL could not be validated. Please check the URL format.')
